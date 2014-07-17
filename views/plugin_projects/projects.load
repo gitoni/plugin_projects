@@ -1,0 +1,62 @@
+{{if auth.is_logged_in():}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+	    <h2>{{=topic}}</h2>
+	    <p>{{=topic_description}}</p>
+	    <hr>
+        </div>
+    </div>
+    <div class="row">
+        {{for item in projects[:8]:}}
+        <div class="col-sm-6 col-md-4 col-lg-3 text-center">
+	    <div class="project-item">
+	        {{=
+		    A( H3(item.title) + IMG(_class = "img-responsive", _src=URL('download',args=item.image),_alt="img"),
+		       _href=URL("plugin_wiki","wiki", args=(IS_SLUG()(item.title)[0]), extension=False))
+	        }}
+	        {{=P(item.description)}}
+	    </div>
+        </div>
+       {{pass}}
+    </div>
+    <hr>
+</div>
+{{else:}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+	    <h2>My work</h2>
+	    {{=A('Login to see more',_class="btn btn-primary" , _href=URL('default', 'user', args='login', vars=dict(_next=URL("plugin_nunatakker", "index", extension = False)), extension = False))}}
+	    <hr>
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-xs-12 col-md-3 text-center">
+	     <div class="service-item">
+		<i class="service-icon fa fa-cubes"></i>
+		<h4>Projects</h4>
+	     </div>
+    </div>
+    <div class="col-xs-12 col-md-3 text-center">
+	    <div class="service-item">
+		<i class="service-icon fa fa-file-code-o"></i>
+		<h4>Code Repositories</h4>
+	    </div>
+    </div>
+    <div class="col-xs-12 col-md-3 text-center">
+	    <div class="service-item">
+		<i class="service-icon fa fa-laptop"></i>
+		<h4>Websites</h4>
+	    </div>
+    </div>
+    <div class="col-xs-12 col-md-3 text-center">
+	    <div class="service-item">
+		<i class="service-icon fa fa-file-powerpoint-o"></i>
+		<h4>Presentations</h4>
+	    </div>
+    </div>
+
+</div>
+    <hr></br></br>
+{{pass}}
